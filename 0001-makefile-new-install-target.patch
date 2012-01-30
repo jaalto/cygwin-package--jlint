@@ -1,0 +1,58 @@
+diff --git a/Makefile b/Makefile
+index ef1bcda..1815975 100644
+--- a/Makefile
++++ b/Makefile
+@@ -6,6 +6,31 @@
+ CC=gcc
+ CPP=g++
+ 
++DESTDIR		=
++prefix		= /usr
++exec_prefix	= $(prefix)
++man_prefix	= $(prefix)/share
++
++PACKAGE		= jlint
++INSTALL		= /usr/bin/install
++INSTALL_BIN	= $(INSTALL) -m 755
++INSTALL_SUID	= $(INSTALL) -m 4755
++INSTALL_DATA	= $(INSTALL) -m 644
++
++INSTALL_OBJS_BIN   = $(PACKAGE) antic
++INSTALL_OBJS_OTHER = jlint.sh
++INSTALL_OBJS_MAN1  = *.1
++INSTALL_OBJS_SHARE =
++
++MANDIR1		= $(DESTDIR)$(man_prefix)/man/man1
++MANDIR5		= $(DESTDIR)$(man_prefix)/man/man5
++MANDIR8		= $(DESTDIR)$(man_prefix)/man/man8
++BINDIR		= $(DESTDIR)$(exec_prefix)/bin
++SBINDIR		= $(DESTDIR)$(exec_prefix)/sbin
++ETCDIR		= $(DESTDIR)/etc/$(PACKAGE)
++SHAREDIR	= $(DESTDIR)$(prefix)/share/$(PACKAGE)
++LIBDIR		= $(DESTDIR)$(prefix)/lib/$(PACKAGE)
++
+ # Hints:
+ # if you use egcs-2.90.* version of GCC please add option -fno-exceptions 
+ # to reduce code size and increase performance
+@@ -102,7 +127,20 @@ test-zip:
+ 	cd ..; rm -f jlint-$(VERSION).zip; zip -v jlint-$(VERSION).zip $(TESTDISTFILES) `find jlint-$(VERSION)/jlintwin32 | grep -v CVS`
+ 
+ 
+-install:
++install-bin:
++	# install-bin
++	$(INSTALL_BIN) -d $(BINDIR)
++	$(INSTALL_BIN) -s $(INSTALL_OBJS_BIN) $(BINDIR)
++	$(INSTALL_BIN) $(INSTALL_OBJS_OTHER) $(BINDIR)
++
++install-man:
++	# install-man
++	$(INSTALL_BIN) -d $(MANDIR1)
++	$(INSTALL_DATA) $(INSTALL_OBJS_MAN1) $(MANDIR1)
++
++install: $(PACKAGE) install-bin
++
++install-old:
+ 	cp jlint antic jlint.sh $(INSTALL_DIR)
+ 	chmod 755 $(INSTALL_DIR)/antic
+ 	chmod 755 $(INSTALL_DIR)/jlint

@@ -1,0 +1,36 @@
+From 32580e93fa07da5811c1b35818a13e6df5978b58 Mon Sep 17 00:00:00 2001
+From: Jari Aalto <jari.aalto@cante.net>
+Date: Fri, 26 Oct 2007 23:25:00 +0300
+Subject: [PATCH] makefile: Fix -lz link phase
+
+Signed-off-by: Jari Aalto <jari.aalto@cante.net>
+---
+ Makefile |    5 +++--
+ 1 files changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index ef1bcda..a247d62 100644
+--- a/Makefile
++++ b/Makefile
+@@ -28,7 +28,8 @@ CFLAGS = -c -Wall -O2 -g
+ #CFLAGS = -c -Wall -O2 -g -DSLIST -DNDEBUG
+ 
+ # link zlib the compression/decompression library. used for decompressing jar files
+-LFLAGS=-g -lz
++LFLAGS=-g
++LIBS=-lz
+ 
+ # Directory to place executables
+ INSTALL_DIR=/usr/local/bin
+@@ -120,7 +121,7 @@ jlint: \
+ 	locks.o \
+ 	message_node.o \
+ 	method_desc.o
+-	$(CPP) $(LFLAGS) -o jlint access_desc.o callee_desc.o class_desc.o graph.o jlint.o local_context.o locks.o message_node.o method_desc.o
++	$(CPP) $(LFLAGS) -o jlint access_desc.o callee_desc.o class_desc.o graph.o jlint.o local_context.o locks.o message_node.o method_desc.o $(LIBS)
+ 
+ access_desc.o: access_desc.cc \
+ 	access_desc.hh \
+-- 
+1.5.3.2.81.g17ed
+

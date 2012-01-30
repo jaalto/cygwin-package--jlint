@@ -1,0 +1,6 @@
+sdesc: "A Java Program Checker"
+ldesc: "A static code checker for Java. It will find bugs,
+inconsistencies and synchronization problems by doing data flow
+analysis and building the lock graph."
+category: Devel
+requires: cygwin zlib
