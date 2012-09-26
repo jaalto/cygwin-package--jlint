@@ -1,0 +1,93 @@
+#  This is manual page in Perl POD format. Read more at
+#  http://perldoc.perl.org/perlpod.html or run command:
+#
+#     perldoc perlpod | less
+#
+#  To check the syntax:
+#
+#     podchecker *.pod
+#
+#  Create manual page with command:
+#
+#    pod2man PAGE.N.pod > PAGE.N
+
+=pod
+
+=head1 NAME
+
+antic - Anti-C control flow analysis
+
+=head1 SYNOPSIS
+
+  antic [options] <file|dir ...>
+
+=head1 DESCRIPTION
+
+AntiC performs control flow analysis to detect situations, where
+control can be passed from one case branch to another e.g. if programmer
+forget about BREAK statement.
+
+Input of AntiC should be valid C/C++ or Java program with no syntax errors.
+If there are some syntax errors in the program, AntiC can detect some of them
+and produce error message, but it doesn't try to perform full syntax checking
+and can't recover after some errors.
+
+Almost all C statements can contain as its sub-part either single
+statement or block of statements (enclosed by braces). Unnoticed
+semicolon or wrong alignment can confuse programmer about real
+statement's body. And compiler can't produce any warnings, because it
+deals with stream of tokens, without information about code alignment.
+
+An example:
+
+    if (x > y);
+    {
+        int tmp = x;
+        x = y;
+        y = tmp;
+    }
+
+Full manual is at /usr/share/doc/jlint/manual.html
+
+=head1 OPTIONS
+
+=over 4
+
+=item B<-java>
+
+Select Java instead of default C language.
+
+=item B<-relax-else>
+
+Do less strict else-statement testing.
+
+=item B<-tab SIZE>
+
+Set display putput option.
+
+=item B<-version>
+
+Display version.
+
+=back
+
+=head1 ENVIRONMENT
+
+None.
+
+=head1 FILES
+
+None.
+
+=head1 SEE ALSO
+
+jlint(1)
+
+=head1 AUTHORS
+
+This manual page was written by Jari Aalto <jari.aalto@cante.net>. Released
+under license GNU GPL version 2 or (at your option) any later
+version. For more information about the license, visit
+<http://www.gnu.org/copyleft/gpl.html>.
+
+=cut

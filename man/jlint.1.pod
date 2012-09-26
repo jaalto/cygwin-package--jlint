@@ -1,0 +1,146 @@
+#  This is manual page in Perl POD format. Read more at
+#  http://perldoc.perl.org/perlpod.html or run command:
+#
+#     perldoc perlpod | less
+#
+#  To check the syntax:
+#
+#     podchecker *.pod
+#
+#  Create manual page with command:
+#
+#    pod2man PAGE.N.pod > PAGE.N
+
+=pod
+
+=head1 NAME
+
+jlint.sh - Java program checker
+
+=head1 SYNOPSIS
+
+  jlint.sh [options] file.class ...
+
+=head1 DESCRIPTION
+
+Check Java code and detect inconsistencies and synchronization
+problems by doing data flow analysis and building a lock graph.
+
+Jlint consists of two separate programs performing syntax and semantic
+verification. As far as Java mostly inherits C/C++ syntax and so
+inherits most of the problems caused by C syntax, the idea was to
+create common syntax verifier for all C-family languages: C, C++,
+Objective C and Java. This program was named C<antic> because it fixes
+problems with C grammar, which can cause dangerous programmer's bugs,
+undetected by compiler. By using hand-written scanner and simple
+top-down parser, AntiC is able to detect such bugs as suspicious use
+of operators priorities, absence of break in switch code, wrong
+assumption about constructions bodies.
+
+There are three main groups of messages from Jlint:
+
+    synchronization, inheritance
+    data flow
+
+These groups are distinguished by kind of analysis which is used to
+detect problems, reported in this messages. Each group is in turn
+divided into several categories, which contains one or more messages.
+Such scheme of message classification is used to support fine-grained
+selection of reported messages.
+
+Because only categories of message can be disabled, but not separate
+messages, a short shell <jlint.sh> script is supplied that will
+suppress certain warnings that are less important. It should be noted
+that it will ignore any race conditions for variables. This is because
+Jlint does not have any notion of "shared reading", so it usually
+produces too many warnings about such data races to be useful. For
+some projects, using Jlint's output unfiltered can still be useful.
+
+Full manual is at /usr/share/doc/jlint/manual.html
+
+=head1 OPTIONS
+
+=over 4
+
+=item B<-history FILE>
+
+Use history file to avoid repeated messages.
+
+=item B<-message_code>
+
+Increase or decrease information about concrete messages. Use [+-] as
+options prefix.
+
+=item B<-message_category>
+
+Include or exclude categories of messages to be reported. Use [+-] as
+options prefix. Message categories:
+
+    synchronization : detect synchronizational problems
+    deadlock : possible deadlock detection
+    race_condition : possible race condition detection
+    wait_nosync : wait or notify is called from non-synchronized method
+
+    inheritance : detect problems with class/interface inheritance
+    super_finalize : super.finalize() is not called from finalize method
+    not_overridden : methods with the same names and different profiles
+    field_redefined : instance or static variable is redefined in derived class
+    shadow_local : local variable shadows one in exterior scope
+
+    data_flow : perform data flow analysis to detect suspicious operations
+    null_reference : detect access to variables with possible NULL value
+    zero_operand : one of the operands of a binary integer operation is zero
+    zero_result : result of operation is always zero
+    redundant : operation always produces the same result
+    overflow : detect incorrect handling of operation overflow
+    incomp_case : switch case label can't be produced by switch expression
+    short_char_cmp : expression of char type is compared with one of short type
+    string_cmp : two strings are compared as object references
+    weak_cmp : using of inequality comparison where equality can be checked
+    domain : operands doesn't belong to the domain of operator
+    truncation : data can be lost as a result of type conversion
+    bounds : array index or length is out of range
+
+    done : notification about verification completion
+
+    all : produce messages of all categories
+
+=item B<-max_shown_paths NUMBER>
+
+Max. shown paths between two sync. methods.
+
+=item B<-source DIR>
+
+Path to directory with *.java files.
+
+=item B<-verbose>
+
+Increase or decrease information about program activity. Use [+-] as
+options prefix.
+
+=item B<-help>
+
+Display short help.
+
+=back
+
+=head1 ENVIRONMENT
+
+None.
+
+=head1 FILES
+
+None.
+
+=head1 SEE ALSO
+
+antic(1)
+
+=head1 AUTHORS
+
+This manual page was written by Jari Aalto <jari.aalto@cante.net>. Released
+under license GNU GPL version 2 or (at your option) any later
+version. For more information about the license, visit
+<http://www.gnu.org/copyleft/gpl.html>.
+
+=cut
