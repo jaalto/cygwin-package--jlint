@@ -13,6 +13,7 @@ Runtime requirements:
   zlib0
 
 Build requirements:
+  perl
   texi2html
   libstdc++6-devel
   zlib-devel
