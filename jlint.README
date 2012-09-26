@@ -8,13 +8,14 @@ synchronization problems by doing data flow analysis and building the
 lock graph.
 
 Runtime requirements:
-  cygwin
-  zlib
+  libgcc1
+  libstdc++6
+  zlib0
 
 Build requirements:
-  cygwin
   texi2html
-  zlib
+  libstdc++6-devel
+  zlib-devel
 
 Canonical homepage:
   http://sourceforge.net/projects/jlint
@@ -46,31 +47,20 @@ Language:
 ------------------------------------
 
 Build instructions:
-  unpack jlint-3.1-1-src.tar.bz2
+  unpack jlint-3.1.2-1-src.tar.bz2
     if you use setup to install this src package, it will be
     unpacked under /usr/src automatically
   cd /usr/src
   ./jlint*.sh all
 
 This will create:
-  jlint-3.1-1.tar.bz2
-  jlint-3.1-1-src.tar.bz2
+  jlint-3.1.2-1.tar.bz2
+  jlint-3.1.2-1-src.tar.bz2
 
 -------------------------------------------
 
 Files included in the binary distribution:
-
-usr/bin/antic.exe
-usr/bin/jlint.exe
-usr/bin/jlint.sh
-usr/share/doc/Cygwin/jlint-3.1.README
-usr/share/doc/jlint-3.1/BUGS
-usr/share/doc/jlint-3.1/COPYING
-usr/share/doc/jlint-3.1/ChangeLog
-usr/share/doc/jlint-3.1/README
-usr/share/doc/jlint-3.1/TODO
-usr/share/doc/jlint-3.1/manual.html
-usr/share/doc/jlint-3.1/manual.texi
+  See Cygwin package archive
 
 ------------------
 
@@ -78,9 +68,11 @@ Port Notes:
 - Makefile: -lz misplaced on link phase. Rewrote install target.
 - No manual pages, not even in Debian.
 
+----- version 3.1.2-1 -----
+- New upstream release 2012-09-26 Jari Aalto
+
 ----- version 3.1-1 -----
 - Initial release 2007-10-26 Jari Aalto
-- This port is based on Debian
 
 Cygwin port maintained by: Jari Aalto <jari.aalto@cante.net>
-Copyright (C) 2007 Jari Aalto; Licenced under GPL v2 or later
+Copyright (C) 2007-2012 Jari Aalto; Licenced under GPL v2 or later

@@ -24,7 +24,7 @@ Main()
 
         root=$(echo $root | sed 's,/$,,')  # Delete trailing slash
 
-        docdir=$(cd $root/usr/share/doc/jlint-* && pwd)
+        docdir=$(cd $root/usr/share/doc/jlint && pwd)
 
         [ ! "$docdir" ] && return 1
 
@@ -34,7 +34,7 @@ Main()
         Cmd cd $docdir/
         Cmd texi2html *.texi
 
-        echo "Remove unneeded file (texi: @include jlint.sh)"
+        echo "Remove unneeded file (was need in texi: @include jlint.sh)"
         Cmd rm -f jlint.sh
     fi
 }
