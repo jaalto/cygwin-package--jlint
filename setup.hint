@@ -3,4 +3,4 @@ ldesc: "A static code checker for Java. It will find bugs,
 inconsistencies and synchronization problems by doing data flow
 analysis and building the lock graph."
 category: Devel
-requires: libgcc1 libstdc++6 zlib0
+requires: bash libgcc1 libstdc++6 zlib0

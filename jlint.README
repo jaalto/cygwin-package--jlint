@@ -8,11 +8,13 @@ synchronization problems by doing data flow analysis and building the
 lock graph.
 
 Runtime requirements:
+  bash
   libgcc1
   libstdc++6
   zlib0
 
 Build requirements:
+  quilt
   perl
   texi2html
   libstdc++6-devel
