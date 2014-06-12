@@ -1,5 +1,7 @@
-diff --git a/Makefile b/Makefile
-index ef1bcda..1815975 100644
+---
+ Makefile |   40 +++++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 39 insertions(+), 1 deletion(-)
+
 --- a/Makefile
 +++ b/Makefile
 @@ -6,6 +6,31 @@
@@ -34,7 +36,7 @@ index ef1bcda..1815975 100644
  # Hints:
  # if you use egcs-2.90.* version of GCC please add option -fno-exceptions 
  # to reduce code size and increase performance
-@@ -102,7 +127,20 @@ test-zip:
+@@ -103,7 +128,20 @@ test-zip:
  	cd ..; rm -f jlint-$(VERSION).zip; zip -v jlint-$(VERSION).zip $(TESTDISTFILES) `find jlint-$(VERSION)/jlintwin32 | grep -v CVS`
  
  
